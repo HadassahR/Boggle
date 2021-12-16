@@ -17,7 +17,7 @@ public class LetterCubeSet {
         }
     }
 
-    private List<String> fourByFourCubes() {
+    public List<String> fourByFourCubes() {
         return Arrays.asList(
                 "AAEGN", "ABBJOO", "ACHOPS", "AFFKPS",
                 "AOOTTW", "CIMOTU", "DEILRX", "DELRVY",
@@ -25,7 +25,7 @@ public class LetterCubeSet {
                 "EIOSST", "ELRTTY", "HIMNQU", "HLNNRZ");
     }
 
-    private List<String> fiveByFiveCubes() {
+    public List<String> fiveByFiveCubes() {
         return Arrays.asList(
                 "CCNSTW", "EMOTTT", "AEEEM", "BJKQXZ", "DDLNOR",
                 "CEILPT", "AEGMNN", "DHLNOR", "CEIILT", "ENSSSU",
@@ -45,14 +45,6 @@ public class LetterCubeSet {
         }
         Collections.shuffle(cubes);
         return cubes;
-    }
-
-    public static void main(String[] args) {
-        LetterCubeSet letterCubeSet = new LetterCubeSet(4);
-        List<String> shuffled = letterCubeSet.shuffleCubes();
-        for (String let : shuffled) {
-            System.out.print(let + " ");
-        }
     }
 
 }
