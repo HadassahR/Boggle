@@ -12,40 +12,47 @@ public class LetterCubeSet {
     public LetterCubeSet(int size) {
         if (size == 4) {
             cubeSet = fourByFourCubes();
+        } else if (size == 5) {
+            cubeSet = fiveByFiveCubes();
         }
     }
-    private List<String> fourByFourCubes () {
-        return  Arrays.asList(
+
+    private List<String> fourByFourCubes() {
+        return Arrays.asList(
                 "AAEGN", "ABBJOO", "ACHOPS", "AFFKPS",
                 "AOOTTW", "CIMOTU", "DEILRX", "DELRVY",
                 "DISTTY", "EEGHNW", "EEINSU", "EHRTVW",
                 "EIOSST", "ELRTTY", "HIMNQU", "HLNNRZ");
     }
 
-    public List<Character> shuffleCubes () throws InterruptedException {
-        int[] indexes = new int [cubeSet.size()];
-        List<Character> cubes = new ArrayList<>();
-        for (int ix : indexes) {
-            indexes[ix] = random.nextInt(CUBE_SIDES);
-        }
+    private List<String> fiveByFiveCubes() {
+        return Arrays.asList(
+                "CCNSTW", "EMOTTT", "AEEEM", "BJKQXZ", "DDLNOR",
+                "CEILPT", "AEGMNN", "DHLNOR", "CEIILT", "ENSSSU",
+                "AFIRSY", "AAFIRS", "AAEEEE", "AEEGMU", "NOOTUW",
+                "OOOTTU", "ADENNN", "FIPRSY", "DHHNOT", "CEIPST",
+                "AAAFRS", "GORRVW", "HIPRRY", "EIIITT", "DHHLOR"
+        );
+    }
+
+    public List<String> shuffleCubes()  {
+        List<String> cubes = new ArrayList<>();
         for (String cube : cubeSet) {
-            int index = cubeSet.indexOf(cube);
-            cubes.add(cube.charAt(indexes[index]));
+            cubes.add(String.valueOf(cube.charAt(random.nextInt(CUBE_SIDES))));
+        }
+        if (cubes.contains("Q")){
+            cubes.set(cubes.indexOf("Q"), "Qu");
         }
         Collections.shuffle(cubes);
         return cubes;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        LetterCubeSet lcs = new LetterCubeSet(4);
-        List<Character> shuffled = lcs.shuffleCubes();
-        for (char c : shuffled) {
-            System.out.print(c + " ");
-        }
-        System.out.println();
-       List<Character> shuffled2 = lcs.shuffleCubes();
-        for (char c : shuffled2) {
-            System.out.print(c + " ");
+    public static void main(String[] args) {
+        LetterCubeSet letterCubeSet = new LetterCubeSet(4);
+        List<String> shuffled = letterCubeSet.shuffleCubes();
+        for (String let : shuffled) {
+            System.out.print(let + " ");
         }
     }
+
 }
