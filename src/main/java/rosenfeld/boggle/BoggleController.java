@@ -6,4 +6,8 @@ public class BoggleController {
 
     }
 
+    public void onLetterClicked() {
+
+    }
+
 }

@@ -7,6 +7,7 @@ import java.util.List;
 public class Game {
     Dictionary dictionary = new Dictionary();
     private List<String> userWords = new ArrayList<>();
+    private final int MIN_LENGTH = 4;
 
     public Game() throws IOException {
     }
@@ -24,7 +25,7 @@ public class Game {
     }
 
     private boolean isValidLength (String word){
-        return word.length() > 2;
+        return word.length() > MIN_LENGTH-1;
     }
 
     private boolean notAlreadyUsed (String word){
