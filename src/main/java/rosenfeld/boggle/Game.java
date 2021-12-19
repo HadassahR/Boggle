@@ -24,7 +24,7 @@ public class Game {
     }
 
     private boolean isValidLength (String word){
-        return word.length() > 3;
+        return word.length() > 2;
     }
 
     private boolean notAlreadyUsed (String word){
@@ -55,4 +55,8 @@ public class Game {
         return score;
     }
     // Controller will determine if letter combination is valid
+
+    public List<String> getPlayerWords (){
+        return this.userWords;
+    }
 }

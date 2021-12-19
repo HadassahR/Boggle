@@ -3,13 +3,15 @@ package rosenfeld.boggle;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class LetterCubeSet {
+public class BoggleBoard {
 
     private final int CUBE_SIDES = 6;
+    private int boardSize;
     private List<String> cubeSet;
     private Random random = new Random();
 
-    public LetterCubeSet(int size) {
+    public BoggleBoard(int size) {
+        boardSize = size;
         if (size == 4) {
             cubeSet = fourByFourCubes();
         } else if (size == 5) {
@@ -45,6 +47,10 @@ public class LetterCubeSet {
         }
         Collections.shuffle(cubes);
         return cubes;
+    }
+
+    public int getBoardSize () {
+        return this.boardSize; 
     }
 
 }

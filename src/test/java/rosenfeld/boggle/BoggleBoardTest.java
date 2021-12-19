@@ -5,15 +5,15 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class LetterCubeSetTest {
+public class BoggleBoardTest {
 
     @Test
     public void fourByFour(){
         // given
-        LetterCubeSet letterCubeSet = new LetterCubeSet(4);
+        BoggleBoard boggleBoard = new BoggleBoard(4);
 
         // when
-        List<String> cubes = letterCubeSet.fourByFourCubes();
+        List<String> cubes = boggleBoard.fourByFourCubes();
 
         // then
         Assert.assertEquals(16, cubes.size());
@@ -22,10 +22,10 @@ public class LetterCubeSetTest {
     @Test
     public void fiveByFive(){
         // given
-        LetterCubeSet letterCubeSet = new LetterCubeSet(5);
+        BoggleBoard boggleBoard = new BoggleBoard(5);
 
         // when
-        List<String> cubes = letterCubeSet.fiveByFiveCubes();
+        List<String> cubes = boggleBoard.fiveByFiveCubes();
 
         // then
         Assert.assertEquals(25, cubes.size());
@@ -34,10 +34,10 @@ public class LetterCubeSetTest {
     @Test
     public void shuffleCubes(){
         // given
-        LetterCubeSet letterCubeSet = new LetterCubeSet(5);
+        BoggleBoard boggleBoard = new BoggleBoard(5);
 
         // when
-        List<String> cubes = letterCubeSet.shuffleCubes();
+        List<String> cubes = boggleBoard.shuffleCubes();
 
         // then
         for (String cube : cubes) {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.layout.GridPane?>
+<?import java.util.ArrayList?>
+<BorderPane
+        stylesheets="@boggle.css"
+        xmlns:fx="http://javafx.com/fxml" prefHeight="500" prefWidth="500">
+
+</BorderPane>
+
