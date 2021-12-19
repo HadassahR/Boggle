@@ -1,6 +1,5 @@
 package rosenfeld.boggle;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class BoggleBoard {
@@ -9,14 +8,11 @@ public class BoggleBoard {
     private int boardSize;
     private List<String> cubeSet;
     private Random random = new Random();
+    private Stack<String> stack = new Stack<>();
 
     public BoggleBoard(int size) {
-        boardSize = size;
-        if (size == 4) {
-            cubeSet = fourByFourCubes();
-        } else if (size == 5) {
-            cubeSet = fiveByFiveCubes();
-        }
+        cubeSet = fourByFourCubes();
+        shuffleCubes();
     }
 
     public List<String> fourByFourCubes() {
@@ -37,7 +33,7 @@ public class BoggleBoard {
         );
     }
 
-    public List<String> shuffleCubes()  {
+    public void shuffleCubes()  { // change test for shuffle cubes
         List<String> cubes = new ArrayList<>();
         for (String cube : cubeSet) {
             cubes.add(String.valueOf(cube.charAt(random.nextInt(CUBE_SIDES))));
@@ -46,7 +42,11 @@ public class BoggleBoard {
             cubes.set(cubes.indexOf("Q"), "Qu");
         }
         Collections.shuffle(cubes);
-        return cubes;
+        stack.addAll(cubes);
+    }
+
+    public String nextLetter () {
+        return stack.pop();
     }
 
     public int getBoardSize () {
