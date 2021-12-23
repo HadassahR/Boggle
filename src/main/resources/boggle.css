@@ -1,0 +1,24 @@
+Label {
+    -fx-border: 1;
+    -fx-min-width: 60;
+    -fx-text-alignment: center;
+    -fx-min-height: 60;
+    -fx-border-color:black;
+    -fx-border-style: solid;
+    -fx-padding: 8 8 8 8;
+    -fx-background-color: #afbacc;
+    -fx-alignment: center;
+    -fx-font: 30px Arial;
+    -fx-font-weight: bold;
+    -fx-border-radius: 6 6 6 6;
+ }
+
+TextField {
+    -fx-min-width: 100;
+    -fx-max-width: 600;
+    -fx-min-height: 100;
+}
+
+#clicked {
+    -fx-background-color: #889dbf;
+}

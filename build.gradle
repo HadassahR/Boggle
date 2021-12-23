@@ -1,6 +1,16 @@
 plugins {
+    id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'java'
 }
+
+javafx {
+    version = '12'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = 'rosenfeld.boggle.BoggleApplication'
 
 group 'org.example'
 version '1.0-SNAPSHOT'
