@@ -3,6 +3,11 @@ plugins {
     id 'java'
 }
 
+javafx {
+    version = '12'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
 apply plugin: 'java'
 apply plugin: 'application'
 mainClassName = 'rosenfeld.boggle.BoggleApplication'
