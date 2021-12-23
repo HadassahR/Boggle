@@ -79,4 +79,6 @@ public class BoggleController {
 //TODO Implement timer
 // TODO Format toolbar
 // TODO Game logic
+// TODO Add Qu condition before adding the letter cube
+//TODO Controller Test
 }
