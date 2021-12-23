@@ -16,7 +16,7 @@ public class GameTest {
         boolean valid = game.enterWord("it");
 
         // then
-        Assert.assertEquals(false, valid);
+        Assert.assertFalse(valid);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class GameTest {
         boolean valid = game.enterWord("Hadassah");
 
         // then
-        Assert.assertEquals(false, valid);
+        Assert.assertFalse(valid);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class GameTest {
         boolean valid = game.enterWord("travel");
 
         // then
-        Assert.assertEquals(false, valid);
+        Assert.assertFalse(valid);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class GameTest {
         boolean valid = game.enterWord("escape");
 
         // then
-        Assert.assertEquals(true, valid);
+        Assert.assertTrue(valid);
     }
 
     @Test

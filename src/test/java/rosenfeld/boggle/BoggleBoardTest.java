@@ -20,24 +20,13 @@ public class BoggleBoardTest {
     }
 
     @Test
-    public void fiveByFive(){
-        // given
-        BoggleBoard boggleBoard = new BoggleBoard(5);
-
-        // when
-        List<String> cubes = boggleBoard.fiveByFiveCubes();
-
-        // then
-        Assert.assertEquals(25, cubes.size());
-    }
-
-    @Test
     public void shuffleCubes(){
         // given
-        BoggleBoard boggleBoard = new BoggleBoard(5);
+        BoggleBoard boggleBoard = new BoggleBoard(4);
 
         // when
-        List<String> cubes = boggleBoard.shuffleCubes();
+        boggleBoard.shuffleCubes();
+        List<String> cubes = boggleBoard.getCubes();
 
         // then
         for (String cube : cubes) {

@@ -1,5 +1,6 @@
 package rosenfeld.boggle;
 
+import javax.print.DocFlavor;
 import java.util.*;
 
 public class BoggleBoard {
@@ -23,15 +24,6 @@ public class BoggleBoard {
                 "EIOSST", "ELRTTY", "HIMNQU", "HLNNRZ");
     }
 
-    public List<String> fiveByFiveCubes() {
-        return Arrays.asList(
-                "CCNSTW", "EMOTTT", "AEEEM", "BJKQXZ", "DDLNOR",
-                "CEILPT", "AEGMNN", "DHLNOR", "CEIILT", "ENSSSU",
-                "AFIRSY", "AAFIRS", "AAEEEE", "AEEGMU", "NOOTUW",
-                "OOOTTU", "ADENNN", "FIPRSY", "DHHNOT", "CEIPST",
-                "AAAFRS", "GORRVW", "HIPRRY", "EIIITT", "DHHLOR"
-        );
-    }
 
     public void shuffleCubes()  { // change test for shuffle cubes
         List<String> cubes = new ArrayList<>();
@@ -47,6 +39,10 @@ public class BoggleBoard {
 
     public String nextLetter () {
         return stack.pop();
+    }
+
+    public List<String> getCubes () {
+        return new ArrayList<>(stack);
     }
 
     public int getBoardSize () {

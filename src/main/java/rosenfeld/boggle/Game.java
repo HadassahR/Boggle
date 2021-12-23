@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    Dictionary dictionary = new Dictionary();
-    private List<String> userWords = new ArrayList<>();
+    Dictionary dictionary;
+    private List<String> userWords;
     private final int MIN_LENGTH = 4;
 
     public Game() throws IOException {
+        dictionary = new Dictionary();
+        userWords = new ArrayList<>();
     }
 
     public boolean enterWord (String word) {

@@ -41,19 +41,19 @@ public class BoggleController {
             label.getStyleClass().add("clicked");
             clickedLetters.add(letter);
         }
-        updateStack();
+        showCurrentWord();
     }
 
     public void startGame() {
         BoggleBoard boggleBoard = new BoggleBoard(4);
         for (Label label : letterTiles) {
-            if (label.getText().isEmpty() || label.getText().equals("")) {
+            if (label.getText().isEmpty()) {
                 label.setText(boggleBoard.nextLetter());
             }
         }
     }
 
-    public void updateStack(){
+    public void showCurrentWord(){
         String word =  clickedLetters.toString()
                 .replaceAll("\\[", "")
                 .replaceAll("]", "")
