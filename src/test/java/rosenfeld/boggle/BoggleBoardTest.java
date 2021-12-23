@@ -10,10 +10,10 @@ public class BoggleBoardTest {
     @Test
     public void fourByFour(){
         // given
-        BoggleBoard boggleBoard = new BoggleBoard(4);
+        BoggleBoard boggleBoard = new BoggleBoard();
 
         // when
-        List<String> cubes = boggleBoard.fourByFourCubes();
+        List<String> cubes = boggleBoard.generateCubes();
 
         // then
         Assert.assertEquals(16, cubes.size());
@@ -22,7 +22,7 @@ public class BoggleBoardTest {
     @Test
     public void shuffleCubes(){
         // given
-        BoggleBoard boggleBoard = new BoggleBoard(4);
+        BoggleBoard boggleBoard = new BoggleBoard();
 
         // when
         boggleBoard.shuffleCubes();

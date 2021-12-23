@@ -9,8 +9,8 @@ public class Game {
     private List<String> userWords;
     private final int MIN_LENGTH = 4;
 
-    public Game() throws IOException {
-        dictionary = new Dictionary();
+    public Game(Dictionary dictionary) {
+        this.dictionary = dictionary;
         userWords = new ArrayList<>();
     }
 

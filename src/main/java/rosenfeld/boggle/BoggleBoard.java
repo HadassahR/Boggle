@@ -11,14 +11,14 @@ public class BoggleBoard {
     private Random random = new Random();
     private Stack<String> stack = new Stack<>();
 
-    public BoggleBoard(int size) {
-        cubeSet = fourByFourCubes();
+    public BoggleBoard() {
+        cubeSet = generateCubes();
         shuffleCubes();
     }
 
-    public List<String> fourByFourCubes() {
+    public List<String> generateCubes() {
         return Arrays.asList(
-                "AAEGN", "ABBJOO", "ACHOPS", "AFFKPS",
+                "AAEEGN", "ABBJOO", "ACHOPS", "AFFKPS",
                 "AOOTTW", "CIMOTU", "DEILRX", "DELRVY",
                 "DISTTY", "EEGHNW", "EEINSU", "EHRTVW",
                 "EIOSST", "ELRTTY", "HIMNQU", "HLNNRZ");

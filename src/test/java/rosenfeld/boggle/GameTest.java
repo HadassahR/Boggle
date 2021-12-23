@@ -1,5 +1,7 @@
 package rosenfeld.boggle;
 
+import com.google.gson.internal.$Gson$Preconditions;
+import com.sun.management.internal.DiagnosticCommandImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +12,7 @@ public class GameTest {
     @Test
     public void tooShort_EnterWord () throws IOException {
         // given
-        Game game = new Game();
+        Game game = new Game(new Dictionary());
 
         // when
         boolean valid = game.enterWord("it");
@@ -22,7 +24,7 @@ public class GameTest {
     @Test
     public void invalidWord_EnterWord () throws IOException {
         // given
-        Game game = new Game();
+        Game game = new Game(new Dictionary());
 
         // when
         boolean valid = game.enterWord("Hadassah");
@@ -34,7 +36,7 @@ public class GameTest {
     @Test
     public void duplicate_EnterWord () throws IOException {
         // given
-        Game game = new Game();
+        Game game = new Game(new Dictionary());
 
         // when
         game.enterWord("travel");
@@ -47,7 +49,7 @@ public class GameTest {
     @Test
     public void valid_EnterWord () throws IOException {
         // given
-        Game game = new Game();
+        Game game = new Game(new Dictionary());
 
         // when
         boolean valid = game.enterWord("escape");
@@ -59,14 +61,14 @@ public class GameTest {
     @Test
     public void score () throws IOException {
         // given
-        Game game = new Game();
+        Game game = new Game(new Dictionary());
 
         // when
-        game.enterWord("cat"); // none
+        game.enterWord("cat");
         game.enterWord("fish");
-        game.enterWord("fish"); // none
+        game.enterWord("fish");
         game.enterWord("worry");
-        game.enterWord("Biden"); // none
+        game.enterWord("Biden");
         game.enterWord("octopus");
 
         // then

@@ -27,7 +27,7 @@ public class BoggleController {
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
         words = new ArrayList<String>();
-        game = new Game();
+        game = new Game(new Dictionary());
     }
 
     public void onLetterClicked(javafx.scene.input.MouseEvent mouseEvent) {
@@ -45,7 +45,7 @@ public class BoggleController {
     }
 
     public void startGame() {
-        BoggleBoard boggleBoard = new BoggleBoard(4);
+        BoggleBoard boggleBoard = new BoggleBoard();
         for (Label label : letterTiles) {
             if (label.getText().isEmpty()) {
                 label.setText(boggleBoard.nextLetter());
