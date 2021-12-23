@@ -12,3 +12,13 @@ Label {
     -fx-font-weight: bold;
     -fx-border-radius: 6 6 6 6;
  }
+
+TextField {
+    -fx-min-width: 100;
+    -fx-max-width: 600;
+    -fx-min-height: 100;
+}
+
+#clicked {
+    -fx-background-color: #889dbf;
+}

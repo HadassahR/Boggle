@@ -18,9 +18,10 @@ public class BoggleApplication extends Application {
         loader.setController(boggleController);
 
         Parent parent = loader.load();
-        Scene scene = new Scene(parent, 500, 500);
+        Scene scene = new Scene(parent, 600, 450);
 
         stage.setTitle("Boggle");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 
