@@ -48,7 +48,7 @@ public class BoggleController {
         BoggleBoard boggleBoard = new BoggleBoard();
         for (Label label : letterTiles) {
             if (label.getText().isEmpty()) {
-                label.setText(boggleBoard.nextLetter());
+                label.setText(boggleBoard.nextLetter()); // will need to reverse load them because of stack
             }
         }
     }

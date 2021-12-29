@@ -42,7 +42,7 @@ public class BoggleBoard {
     }
 
     public List<String> getCubes () {
-        return new ArrayList<>(stack);
+        return this.cubeSet;
     }
 
     public int getBoardSize () {
