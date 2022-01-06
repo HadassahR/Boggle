@@ -13,22 +13,23 @@ import java.util.Timer;
 
 public class BoggleController {
     @FXML
-    Button start, submitWord;
+    public Button start, submitWord;
     @FXML
-    Text currentWord, score, timer;
+    public Text currentWord, score, timer;
     @FXML
-    private List<Label> letterTiles;
+    public Label [][] letterMatrix;
     @FXML
-    TextField playerWords;
-    Game game;
+    public TextField playerWords;
 
-    private Stack <String> clickedLetters;
-    private List<String> words;
+    Game game;
+    Stack <String> clickedLetters;
+    List<String> words;
 
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
         words = new ArrayList<String>();
         game = new Game(new Dictionary());
+        letterMatrix = new Label[4][4];
     }
 
     public void onLetterClicked(javafx.scene.input.MouseEvent mouseEvent) {
@@ -47,9 +48,9 @@ public class BoggleController {
 
     public void startGame() {
         BoggleBoard boggleBoard = new BoggleBoard();
-        for (Label label : letterTiles) {
-            if (label.getText().isEmpty()) {
-                label.setText(boggleBoard.nextLetter()); // will need to reverse load them because of stack
+        for (int r = 0; r < boggleBoard.getBoardSize(); r++) {
+            for (int c = 0; c < boggleBoard.getBoardSize(); c++) {
+                letterMatrix[r][c].setText(boggleBoard.getCubes()[r][c]);
             }
         }
     }

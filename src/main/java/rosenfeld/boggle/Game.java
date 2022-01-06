@@ -57,9 +57,15 @@ public class Game {
         }
         return score;
     }
-    // Controller will determine if letter combination is valid
 
     public List<String> getPlayerWords (){
         return this.userWords;
+    }
+
+    public boolean validateTile(int row, int col, boolean [][] visited){
+        return withinBoardAndUnvisited(row, col, visited);
+    }
+    private boolean withinBoardAndUnvisited(int row, int col, boolean[][] visited) {
+        return (row >= 0) && (col >= 0) && (row < 3) && (col < 3) && (!visited[row][col]);
     }
 }

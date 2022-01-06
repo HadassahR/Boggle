@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<?import java.util.ArrayList?>
+<?import java.lang.reflect.Array?>
 <BorderPane
         stylesheets="@boggle.css"
         xmlns:fx="http://javafx.com/fxml"
@@ -54,24 +53,32 @@
     </bottom>
 
     <fx:define>
-        <ArrayList fx:id="letterTiles">
-            <fx:reference source="tile1"/>
-            <fx:reference source="tile2"/>
-            <fx:reference source="tile3"/>
-            <fx:reference source="tile4"/>
-            <fx:reference source="tile5"/>
-            <fx:reference source="tile6"/>
-            <fx:reference source="tile7"/>
-            <fx:reference source="tile8"/>
-            <fx:reference source="tile9"/>
-            <fx:reference source="tile10"/>
-            <fx:reference source="tile11"/>
-            <fx:reference source="tile12"/>
-            <fx:reference source="tile13"/>
-            <fx:reference source="tile14"/>
-            <fx:reference source="tile15"/>
-            <fx:reference source="tile16"/>
-        </ArrayList>
+        <Array fx:id="letterSet">
+            <Array fx:id="letterSet0">
+                <fx:reference source="tile1"/>
+                <fx:reference source="tile2"/>
+                <fx:reference source="tile3"/>
+                <fx:reference source="tile4"/>
+            </Array>
+            <Array fx:id="letterSet1">
+                <fx:reference source="tile5"/>
+                <fx:reference source="tile6"/>
+                <fx:reference source="tile7"/>
+                <fx:reference source="tile8"/>
+            </Array>
+            <Array fx:id="letterSet2">
+                <fx:reference source="tile9"/>
+                <fx:reference source="tile10"/>
+                <fx:reference source="tile11"/>
+                <fx:reference source="tile12"/>
+            </Array>
+            <Array fx:id="letterSet3">
+                <fx:reference source="tile13"/>
+                <fx:reference source="tile14"/>
+                <fx:reference source="tile15"/>
+                <fx:reference source="tile16"/>
+            </Array>
+        </Array>
     </fx:define>
 </BorderPane>
 
