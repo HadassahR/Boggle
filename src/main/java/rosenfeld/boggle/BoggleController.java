@@ -9,12 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.Timer;
 
 public class BoggleController {
     @FXML
     Button start, submitWord;
     @FXML
-    Text currentWord, score;
+    Text currentWord, score, timer;
     @FXML
     private List<Label> letterTiles;
     @FXML
@@ -75,6 +76,12 @@ public class BoggleController {
         clickedLetters.clear();
         currentWord.setText("");
         score.setText(String.valueOf(game.calculateScore()));
+    }
+
+    public void initializeTimer() {
+//        final int startTime = 180;
+//        Timer timerObj = new Timer();
+//        timer.setText()
     }
 //TODO Implement timer
 // TODO Format toolbar

@@ -6,7 +6,7 @@ import java.util.*;
 public class BoggleBoard {
 
     private final int CUBE_SIDES = 6;
-    private int boardSize;
+    private int boardSize = 4;
     private List<String> cubeSet;
     private Random random = new Random();
     private Stack<String> stack = new Stack<>();
