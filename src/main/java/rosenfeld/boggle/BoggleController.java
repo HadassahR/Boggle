@@ -6,10 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-import java.util.Timer;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class BoggleController {
     @FXML
@@ -24,26 +22,31 @@ public class BoggleController {
     Game game;
     Stack <String> clickedLetters;
     List<String> words;
+    boolean visited[][];
 
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
         words = new ArrayList<String>();
         game = new Game(new Dictionary());
+        visited = new boolean[4][4];
         letterMatrix = new Label[4][4];
     }
 
     public void onLetterClicked(javafx.scene.input.MouseEvent mouseEvent) {
         Label label = (Label) mouseEvent.getSource();
-        String letter = label.getText();
-
-        if (label.getStyle().equals("clicked")){
-            label.getStyleClass().remove("clicked");
-            clickedLetters.remove(letter);
-        } else {
-            label.getStyleClass().add("clicked");
-            clickedLetters.add(letter);
+        int row = 0;
+        int col = 0;
+        for (int r = 0; r < 4; r++) {
+            for (int c = 0; c < 4; c++){
+                if (letterMatrix[r][c] == label) {
+                    if (game.validateTile(r, c, visited)){
+                        String letter = label.getText();
+                        showCurrentWord();
+                        visited[r][c] = true;
+                    }
+                }
+            }
         }
-        showCurrentWord();
     }
 
     public void startGame() {
@@ -77,6 +80,7 @@ public class BoggleController {
         clickedLetters.clear();
         currentWord.setText("");
         score.setText(String.valueOf(game.calculateScore()));
+        Arrays.fill(visited, false);
     }
 
     public void initializeTimer() {
