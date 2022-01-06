@@ -1,20 +1,21 @@
 package rosenfeld.boggle;
 
-public class MyTrie {
+public class WordTrie {
     private Node root;
 
-    public MyTrie(){
+    public WordTrie(){
         root = new Node ('*');
     }
 
     public void insert (String word) {
+        word = word.toUpperCase();
         Node curr = root;
         for (int i = 0; i < word.length(); i++){
             char c = word.charAt(i);
-            if (curr.children[c - 'a'] == null){
-                curr.children [c - 'a'] = new Node (c);
+            if (curr.children[c - 'A'] == null){
+                curr.children [c - 'A'] = new Node (c);
             }
-            curr = curr.children[c - 'a'];
+            curr = curr.children[c - 'A'];
         }
         curr.isWord = true;
     }
@@ -28,10 +29,10 @@ public class MyTrie {
         Node curr = root;
         for (int i = 0; i < word.length(); i++){
             char c = word.charAt(i);
-            if (curr.children[c - 'a'] == null) {
+            if (curr.children[c - 'A'] == null) {
                 return null;
             }
-            curr = curr.children[c - 'a'];
+            curr = curr.children[c - 'A'];
         }
         return curr;
     }
