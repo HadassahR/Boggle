@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Solver {
+
     public void findWord(String[][] board, boolean[][] visited, int row, int col, String word, List<String> englishDic) {
         if (englishDic.contains(word)) {
             System.out.println(word);
         }
-        if (board.length == word.length()) {
+        if (word.length() == 16) {
             return;
         }
         for (int i = 0; i < pathRow.length; i++) {
@@ -37,18 +38,25 @@ public class Solver {
         Dictionary dictionary = new Dictionary();
         List<String> dictionaryWords = dictionary.getWordList().stream().filter(w -> w.length() > 3).collect(Collectors.toList());
         Solver solver = new Solver();
+        String[][] boggleMatrix = new String[boggleBoard.getBoardSize()][boggleBoard.getBoardSize()];
+        for (int row = 0; row < boggleMatrix.length; row++){
+            for (int col = 0; col < boggleMatrix.length; col++){
+                boggleMatrix[row][col] = boggleBoard.nextLetter();
+            }
+        }
+        for (int i = 0; i < boggleMatrix.length; i++) {
+            for (int j = 0; j < boggleMatrix.length; j++) {
+                System.out.print(boggleMatrix[i][j] + " ");
+            }
+        }
 
-        String[][] board = new String[][]{{"G", "I", "Z", "A"},
-                {"U", "E", "K", "I"},
-                {"B", "S", "K", "O"},
-                {"T", "U", "M", "S"}};
         boolean[][] visited = new boolean[boggleBoard.getBoardSize()][boggleBoard.getBoardSize()];
         String word = "";
 
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 4; col++) {
                 visited[row][col] = true;
-                solver.findWord(board, visited, 0, 0, word + board[row][col],dictionaryWords);
+                solver.findWord(boggleMatrix, visited, 0, 0, word + boggleMatrix[row][col],dictionaryWords);
                 visited[row][col] = false;
             }
         }

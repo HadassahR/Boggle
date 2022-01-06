@@ -45,6 +45,7 @@ public class Dictionary {
     public Map<String, String> getWordsToDefinitions() {
         return wordsToDefinitions;
     }
+
     public int size() {
         return wordsToDefinitions.size();
     }
