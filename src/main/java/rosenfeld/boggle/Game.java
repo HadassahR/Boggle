@@ -8,6 +8,8 @@ public class Game {
     Dictionary dictionary;
     private List<String> userWords;
     private final int MIN_LENGTH = 4;
+    private int lastRowClicked;
+    private int lastColClicked;
 
     public Game(Dictionary dictionary) {
         this.dictionary = dictionary;
@@ -62,10 +64,50 @@ public class Game {
         return this.userWords;
     }
 
-    public boolean validateTile(int row, int col, boolean [][] visited){
-        return withinBoardAndUnvisited(row, col, visited);
+    public boolean validateTile(int lastRow, int lastCol, int currRow, int currCol, boolean [][] visited){
+        return withinBoardAndUnvisited(currRow, currCol, visited) && connected(lastRow, lastCol, currRow, currCol, visited);
     }
     private boolean withinBoardAndUnvisited(int row, int col, boolean[][] visited) {
-        return (row >= 0) && (col >= 0) && (row < 3) && (col < 3) && (!visited[row][col]);
+        return (row > -1) && (col > -1) && (row < 4) && (col < 4) && (!visited[row][col]);
+    }
+
+    private boolean connected (int lastRow, int lastCol, int currRow, int currCol, boolean [][] visited) {
+        int[] rowPath = new int [] { 0, 0, 1, 1, -1, 1, -1, -1 };
+        int[] colPath = new int [] { 1, -1, -1, 1, 1, 0, 0, -1 };
+
+        for (int ix = 0; ix < rowPath.length; ix++) {
+            if (withinBoardAndUnvisited(lastRow + rowPath[ix], lastCol + colPath[ix], visited)){
+                if (currRow == lastRow + rowPath[ix] && currCol == lastCol + colPath[ix]){
+                    visited[currRow][currCol] = true;
+                    return true;
+                }
+            }
+        }
+        return false;
+//        for (int ix = 0; ix < rowPath.length; ix++) {
+//            int newRow = row + rowPath[ix];
+//            int newCol = row + colPath[ix];
+//            if (withinBoardAndUnvisited(newRow, newCol, visited)){
+//                visited[newRow][newCol] = true;
+//                findWord(visited, newRow, newCol, word+boggleMatrix[newRow][newCol]);
+//                visited[newRow][newCol] = false;
+//            }
+//        }
+    }
+
+    public int getLastRowClicked(){
+        return this.lastRowClicked;
+    }
+
+    public int getLastColClicked() {
+        return this.lastColClicked;
+    }
+
+    public void setLastRowClicked (int n){
+        lastRowClicked = n;
+    }
+
+    public void setLastColClicked (int n){
+        lastColClicked = n;
     }
 }

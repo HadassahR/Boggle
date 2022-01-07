@@ -15,44 +15,67 @@ public class BoggleController {
     @FXML
     public Text currentWord, score, timer;
     @FXML
-    public Label [][] letterMatrix;
+    public ArrayList<Label> letterSet;
     @FXML
     public TextField playerWords;
 
     Game game;
+    boolean startWord = true;
     Stack <String> clickedLetters;
     List<String> words;
+    Label [][] letterMatrix;
+    private final int SIZE = 4;
     boolean visited[][];
 
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
         words = new ArrayList<String>();
         game = new Game(new Dictionary());
-        visited = new boolean[4][4];
-        letterMatrix = new Label[4][4];
+        visited = new boolean[SIZE][SIZE];
+        letterMatrix = new Label[SIZE][SIZE];
     }
 
     public void onLetterClicked(javafx.scene.input.MouseEvent mouseEvent) {
         Label label = (Label) mouseEvent.getSource();
-        int row = 0;
-        int col = 0;
-        for (int r = 0; r < 4; r++) {
-            for (int c = 0; c < 4; c++){
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
                 if (letterMatrix[r][c] == label) {
-                    if (game.validateTile(r, c, visited)){
+                    System.out.print (r + ", " + c + " "); // debug
+                    if (startWord){
+                        game.setLastColClicked(c);
+                        game.setLastRowClicked(r);
                         String letter = label.getText();
-                        showCurrentWord();
+                        clickedLetters.push(letter);
                         visited[r][c] = true;
+                        startWord = false;
+                    } else {
+                        if (game.validateTile(game.getLastRowClicked(), game.getLastColClicked(), r, c, visited)) {
+                            System.out.println("valid");
+                            String letter = label.getText();
+                            clickedLetters.push(letter);
+                            visited[r][c] = true;
+                            game.setLastColClicked(c);
+                            game.setLastRowClicked(r);
+                        }
+                        else
+                            {
+                            System.out.println("invalid");
+                        }
                     }
                 }
             }
         }
+        showCurrentWord();
     }
+
 
     public void startGame() {
         BoggleBoard boggleBoard = new BoggleBoard();
+        int index = 0;
         for (int r = 0; r < boggleBoard.getBoardSize(); r++) {
             for (int c = 0; c < boggleBoard.getBoardSize(); c++) {
+                letterMatrix[r][c] = letterSet.get(index);
+                index++;
                 letterMatrix[r][c].setText(boggleBoard.getCubes()[r][c]);
             }
         }
@@ -67,7 +90,7 @@ public class BoggleController {
         currentWord.setText(word);
     }
 
-    public void submitWord(){
+    public void submitWord() {
         String word =  clickedLetters.toString()
                 .replaceAll("\\[", "")
                 .replaceAll("]", "")
@@ -80,7 +103,8 @@ public class BoggleController {
         clickedLetters.clear();
         currentWord.setText("");
         score.setText(String.valueOf(game.calculateScore()));
-        Arrays.fill(visited, false);
+        visited = new boolean [SIZE][SIZE];
+        startWord = true;
     }
 
     public void initializeTimer() {
