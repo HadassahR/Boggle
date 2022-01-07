@@ -19,6 +19,6 @@ TextField {
     -fx-min-height: 100;
 }
 
-#clicked {
+.clicked {
     -fx-background-color: #889dbf;
 }

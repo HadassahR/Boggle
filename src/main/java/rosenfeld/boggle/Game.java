@@ -84,18 +84,9 @@ public class Game {
             }
         }
         return false;
-//        for (int ix = 0; ix < rowPath.length; ix++) {
-//            int newRow = row + rowPath[ix];
-//            int newCol = row + colPath[ix];
-//            if (withinBoardAndUnvisited(newRow, newCol, visited)){
-//                visited[newRow][newCol] = true;
-//                findWord(visited, newRow, newCol, word+boggleMatrix[newRow][newCol]);
-//                visited[newRow][newCol] = false;
-//            }
-//        }
     }
 
-    public int getLastRowClicked(){
+    public int getLastRowClicked() {
         return this.lastRowClicked;
     }
 
@@ -103,11 +94,11 @@ public class Game {
         return this.lastColClicked;
     }
 
-    public void setLastRowClicked (int n){
+    public void setLastRowClicked (int n) {
         lastRowClicked = n;
     }
 
-    public void setLastColClicked (int n){
+    public void setLastColClicked (int n) {
         lastColClicked = n;
     }
 }

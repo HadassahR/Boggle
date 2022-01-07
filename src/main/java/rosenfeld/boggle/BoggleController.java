@@ -29,7 +29,6 @@ public class BoggleController {
 
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
-        words = new ArrayList<String>();
         game = new Game(new Dictionary());
         visited = new boolean[SIZE][SIZE];
         letterMatrix = new Label[SIZE][SIZE];
@@ -44,6 +43,7 @@ public class BoggleController {
                     if (startWord){
                         game.setLastColClicked(c);
                         game.setLastRowClicked(r);
+                        label.getStyleClass().add("clicked");
                         String letter = label.getText();
                         clickedLetters.push(letter);
                         visited[r][c] = true;
@@ -51,6 +51,7 @@ public class BoggleController {
                     } else {
                         if (game.validateTile(game.getLastRowClicked(), game.getLastColClicked(), r, c, visited)) {
                             System.out.println("valid");
+                            label.getStyleClass().add("clicked");
                             String letter = label.getText();
                             clickedLetters.push(letter);
                             visited[r][c] = true;
@@ -105,6 +106,13 @@ public class BoggleController {
         score.setText(String.valueOf(game.calculateScore()));
         visited = new boolean [SIZE][SIZE];
         startWord = true;
+        for(Label[] letterSet : letterMatrix){
+            for (Label letter : letterSet){
+                if (letter.getStyleClass().contains("clicked")){
+                    letter.getStyleClass().remove("clicked");
+                }
+            }
+        }
     }
 
     public void initializeTimer() {
