@@ -3,6 +3,7 @@ package rosenfeld.boggle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import java.io.IOException;
@@ -13,11 +14,11 @@ public class BoggleController {
     @FXML
     public Button start, submitWord;
     @FXML
-    public Text currentWord, score, timer;
+    public Label currentWord, score, timer;
     @FXML
     public ArrayList<Label> letterSet;
     @FXML
-    public TextField playerWords;
+    public TextArea playerWords;
 
     Game game;
     boolean startWord = true;

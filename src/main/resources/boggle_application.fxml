@@ -19,9 +19,9 @@
             <HBox alignment="TOP_CENTER" spacing="3">
                 <Button fx:id="start" text="Begin Game" onMouseClicked="#startGame" />
                 <Button fx:id="submit" text="Submit Word" onMouseClicked="#submitWord" />
-                <Text fx:id="currentWord"/>
-                <Text fx:id="timer" text="1:00"/>
-                <Text fx:id="score"/>
+                <Label styleClass="timerStyle" fx:id="currentWord"/>
+                <Label styleClass="timerStyle" fx:id="timer" text="1:00"/>
+                <Label styleClass="timerStyle" fx:id="score"/>
             </HBox>
         </ToolBar>
     </top>
@@ -50,7 +50,7 @@
     </center>
 
     <bottom>
-            <TextField fx:id="playerWords" editable="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="4"/>
+            <TextArea fx:id="playerWords" wrapText="true" editable="false" GridPane.columnSpan="4" GridPane.rowIndex="4"/>
     </bottom>
 
     <fx:define>
