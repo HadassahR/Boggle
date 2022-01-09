@@ -1,5 +1,7 @@
 package rosenfeld.boggle;
 
+import java.io.IOException;
+
 public class WordTrie {
     private Node root;
 

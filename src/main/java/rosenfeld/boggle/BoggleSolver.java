@@ -34,19 +34,8 @@ public class BoggleSolver {
             for (int col = 0; col < boggleMatrix.length; col++) {
                 String currPrefix = boggleMatrix[row][col];
                 List<Location> neighbors = getNeighbors(row, col, visited);
-
-                while (neighbors.size() > 0) {
-                    for (Location location : neighbors) {
-                        String currWord = currPrefix + boggleMatrix[location.getRow()][location.getCol()];
-                        if (boggleTrie.startsWith(currWord)) {
-                            if (boggleTrie.search(currWord)) {
-                                possibleWords.add(currWord);//**
-                            }
-                            // Continue searching locations
-                        } else {
-                            neighbors.remove(location);
-                        }
-                    }
+                for (Location location : neighbors) {
+                   searchWords(neighbors, currPrefix, visited, boggleMatrix);
                 }
             }
         }
@@ -69,15 +58,18 @@ public class BoggleSolver {
         return (row > -1) && (col > -1) && (row < 4) && (col < 4) && (!visited[row][col]);
     }
 
-    private void searchWords (List<Location> neighbors, String currLet, String[][] boggleMatrix) {
+    private void searchWords (List<Location> neighbors, String currPrefix, boolean [][] visited, String[][] boggleMatrix) {
         for (Location location : neighbors) {
-            String currWord = currLet + boggleMatrix[location.getRow()][location.getCol()];
+            String currWord = currPrefix + boggleMatrix[location.getRow()][location.getCol()];
             if (boggleTrie.startsWith(currWord)) {
                 if (boggleTrie.search(currWord)) {
-                    possibleWords.add(currWord);//**
+                    possibleWords.add(currWord);
                 }
-//                searchWords(neighbors,
+                visited[location.getRow()][location.getCol()] = true;
+                List<Location> newNeighbors = getNeighbors(location.getRow(), location.getCol(), visited);
+                searchWords(newNeighbors, currWord, visited, boggleMatrix);
             } else {
+                visited[location.getRow()][location.getCol()] = true;
                 neighbors.remove(location);
             }
         }
