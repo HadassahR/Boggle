@@ -35,7 +35,7 @@ public class BoggleSolver {
                 String currPrefix = boggleMatrix[row][col];
                 List<Location> neighbors = getNeighbors(row, col, visited);
                 for (Location location : neighbors) {
-                   searchWords(neighbors, currPrefix, visited, boggleMatrix);
+                   boardSearch(neighbors, currPrefix, visited, boggleMatrix);
                 }
             }
         }
@@ -58,7 +58,7 @@ public class BoggleSolver {
         return (row > -1) && (col > -1) && (row < 4) && (col < 4) && (!visited[row][col]);
     }
 
-    private void searchWords (List<Location> neighbors, String currPrefix, boolean [][] visited, String[][] boggleMatrix) {
+    private void boardSearch (List<Location> neighbors, String currPrefix, boolean [][] visited, String[][] boggleMatrix) {
         for (Location location : neighbors) {
             String currWord = currPrefix + boggleMatrix[location.getRow()][location.getCol()];
             if (boggleTrie.startsWith(currWord)) {
@@ -67,7 +67,7 @@ public class BoggleSolver {
                 }
                 visited[location.getRow()][location.getCol()] = true;
                 List<Location> newNeighbors = getNeighbors(location.getRow(), location.getCol(), visited);
-                searchWords(newNeighbors, currWord, visited, boggleMatrix);
+                boardSearch(newNeighbors, currWord, visited, boggleMatrix);
             } else {
                 visited[location.getRow()][location.getCol()] = true;
                 neighbors.remove(location);
