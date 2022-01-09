@@ -70,7 +70,6 @@ public class BoggleSolver {
                 List<Location> newNeighbors = getNeighbors(location.getRow(), location.getCol(), visited);
                 boardSearch(newNeighbors, currWord, visited, boggleMatrix);
             } else {
-                visited[location.getRow()][location.getCol()] = true;
                 neighbors.remove(location);
             }
         }
