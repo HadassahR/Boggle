@@ -1,6 +1,5 @@
 package rosenfeld.boggle;
-import org.graalvm.compiler.asm.amd64.AMD64Assembler;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,6 +72,12 @@ public class BoggleSolver {
                 neighbors.remove(location);
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BoggleSolver boggleSolver = new BoggleSolver(new BoggleBoard(), new Game(new Dictionary()));
+        boggleSolver.findWords();
+        System.out.println(boggleSolver.possibleWords.size());
     }
 
 }

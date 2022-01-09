@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public class WordTrie {
     private Node root;
+    private int wordCount = 0;
 
     public WordTrie(){
         root = new Node ('*');
@@ -20,11 +21,22 @@ public class WordTrie {
             curr = curr.children[c - 'A'];
         }
         curr.isWord = true;
+        wordCount ++;
     }
 
     public boolean search (String word){
+        word = word.toUpperCase();
         Node node = getNode(word);
         return node != null && node.isWord;
+    }
+
+    public boolean startsWith (String prefix) {
+        prefix = prefix.toUpperCase();
+        return getNode(prefix) != null;
+    }
+
+    public int getWordCount() {
+        return this.wordCount;
     }
 
     private Node getNode (String word) {
@@ -37,10 +49,6 @@ public class WordTrie {
             curr = curr.children[c - 'A'];
         }
         return curr;
-    }
-
-    public boolean startsWith (String prefix) {
-        return getNode(prefix) != null;
     }
 
     class Node {
