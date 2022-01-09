@@ -37,6 +37,10 @@ public class WordTrie {
         return curr;
     }
 
+    public boolean startsWith (String prefix) {
+        return getNode(prefix) != null;
+    }
+
     class Node {
         public char character;
         public boolean isWord;
