@@ -23,7 +23,7 @@ public class WordTrieTest {
     }
 
     @Test
-    public void search() {
+    public void isWord() {
         // given
         WordTrie wordTrie = new WordTrie();
         for (String word : sampleDictionary) {
@@ -31,10 +31,10 @@ public class WordTrieTest {
         }
 
         // when
-        boolean search1 = wordTrie.search("data"); // true
-        boolean search2 = wordTrie.search("ENVIRON");  // false
-        boolean search3 = wordTrie.search("PYTHON"); // false
-        boolean search4 = wordTrie.search("CONCATENATE"); // true
+        boolean search1 = wordTrie.isWord("data"); // true
+        boolean search2 = wordTrie.isWord("ENVIRON");  // false
+        boolean search3 = wordTrie.isWord("PYTHON"); // false
+        boolean search4 = wordTrie.isWord("CONCATENATE"); // true
 
 
         // then

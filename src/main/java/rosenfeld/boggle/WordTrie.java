@@ -24,7 +24,7 @@ public class WordTrie {
         wordCount ++;
     }
 
-    public boolean search (String word){
+    public boolean isWord(String word){
         word = word.toUpperCase();
         Node node = getNode(word);
         return node != null && node.isWord;

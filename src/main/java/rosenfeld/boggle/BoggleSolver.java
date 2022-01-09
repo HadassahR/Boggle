@@ -1,6 +1,7 @@
 package rosenfeld.boggle;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,14 +19,14 @@ public class BoggleSolver {
         createTrie();
     }
 
-    public void createTrie(){
+    private void createTrie(){
         boggleTrie = new WordTrie();
         for (String word : boggleDictionary){
             boggleTrie.insert(word);
         }
     }
 
-    public void findWords() {
+    private void findWords() {
         boolean[][] visited = new boolean [boggleBoard.getBoardSize()][boggleBoard.getBoardSize()];
         String[][] boggleMatrix = boggleBoard.getCubes();
 
@@ -33,8 +34,9 @@ public class BoggleSolver {
             for (int col = 0; col < boggleMatrix.length; col++) {
                 String currPrefix = boggleMatrix[row][col];
                 List<Location> neighbors = getNeighbors(row, col, visited);
-                for (Location location : neighbors) {
+                while (neighbors.size() > 0) {
                    boardSearch(neighbors, currPrefix, visited, boggleMatrix);
+                   visited = new boolean [boggleBoard.getBoardSize()][boggleBoard.getBoardSize()]; // reset all visited to false
                 }
             }
         }
@@ -61,7 +63,7 @@ public class BoggleSolver {
         for (Location location : neighbors) {
             String currWord = currPrefix + boggleMatrix[location.getRow()][location.getCol()];
             if (boggleTrie.startsWith(currWord)) {
-                if (boggleTrie.search(currWord)) {
+                if (boggleTrie.isWord(currWord)) {
                     possibleWords.add(currWord);
                 }
                 visited[location.getRow()][location.getCol()] = true;
@@ -74,10 +76,9 @@ public class BoggleSolver {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        BoggleSolver boggleSolver = new BoggleSolver(new BoggleBoard(), new Game(new Dictionary()));
-        boggleSolver.findWords();
-        System.out.println(boggleSolver.possibleWords.size());
+    public List<String> getPossibleWords() {
+        findWords();
+        return this.possibleWords;
     }
 
 }
