@@ -3,7 +3,7 @@
 - Resources on Tries: <br>[Tries and Boggle](https://www.geeksforgeeks.org/boggle-set-2-using-trie/?ref=lbp)<br> [Overview Video](https://www.youtube.com/watch?v=K5gYn7qL3lE)<br>[Implementation Video](https://www.youtube.com/watch?v=giiaIofn31A)
 
 <br> <b> Game Rules: </b> adapted from [here](https://groupgames101.com/boggle-rules/) <br><br>
-Objective: Create as many unique words as possible from a board of shuffled letter cubes
+Objective: Create as many unique words as possible from a board of shuffled letter cubes within 3 minutes
 1. Minimum word length is 4 letters
 2. Words must be unique - no duplicates
 3. Letters can only be used once in each word. Words are made by clicking letters adjacent to most recent clicked cube 

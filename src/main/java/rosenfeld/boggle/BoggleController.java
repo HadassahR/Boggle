@@ -4,14 +4,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 public class BoggleController {
     @FXML
     public Button start, submit, solve;
     @FXML
-    public Label currentWord, score, timer;
+    public Label currentWord, score;
     @FXML
     public ArrayList<Label> letterSet;
     @FXML
@@ -66,14 +69,9 @@ public class BoggleController {
     }
 
     public void initializeTimer() {
-        final int seconds = 15;
+        final int seconds = 180;
         BoggleController controller = this;
-        new Thread(new Runnable() {
-            @Override public void run() {
-                new GameTimer(seconds, game, controller);
-                }
-
-        }).start();
+        new Thread(() -> new GameTimer(seconds, game, controller)).start();
     }
 
     private void onStartWord(int r, int c) {
@@ -125,7 +123,7 @@ public class BoggleController {
     private void afterSubmission () {
         clickedLetters.clear();
         currentWord.setText("");
-        score.setText(String.valueOf(game.calculateScore()));
+        score.setText("SCORE: " + game.calculateScore());
         visited = new boolean [SIZE][SIZE];
         startWord = true;
 
@@ -141,6 +139,7 @@ public class BoggleController {
     public void endGame () {
         submit.setVisible(false);
         solve.setVisible(true);
+        currentWord.setVisible(false);
     }
     public void showSolution () throws IOException {
         solvedWords.setVisible(true);
