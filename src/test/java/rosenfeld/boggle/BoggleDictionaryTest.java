@@ -50,7 +50,7 @@ public class BoggleDictionaryTest {
         @Test
         public void validFirstWord_checkForWord() throws IOException {
             BoggleDictionary test = new BoggleDictionary();
-            boolean testWord = test.checkForWord("AA");
+            boolean testWord = test.checkForWord("AAHS");
             Assert.assertTrue(testWord);
         }
 
