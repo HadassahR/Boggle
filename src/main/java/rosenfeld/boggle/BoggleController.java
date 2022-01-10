@@ -4,27 +4,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-
 import java.io.IOException;
 import java.util.*;
 
 public class BoggleController {
     @FXML
-    public Button start, submitWord;
+    public Button start, submit, solve;
     @FXML
     public Label currentWord, score, timer;
     @FXML
     public ArrayList<Label> letterSet;
     @FXML
-    public TextArea playerWords;
+    public TextArea playerWords, solvedWords;
 
-    Game game;
-    boolean startWord = true;
-    Stack <String> clickedLetters;
-    List<String> words;
-    Label [][] letterMatrix;
-    private final int SIZE = 4;
-    boolean visited[][];
+    private Game game;
+    private BoggleBoard boggleBoard;
+    private Stack <String> clickedLetters;
+
+    public boolean startWord = true;
+    public List<String> words;
+    public Label [][] letterMatrix;
+    public final int SIZE = 4;
+    public boolean[][] visited;
 
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
@@ -33,44 +34,8 @@ public class BoggleController {
         letterMatrix = new Label[SIZE][SIZE];
     }
 
-    public void onLetterClicked(javafx.scene.input.MouseEvent mouseEvent) {
-        Label label = (Label) mouseEvent.getSource();
-        for (int r = 0; r < SIZE; r++) {
-            for (int c = 0; c < SIZE; c++) {
-                if (letterMatrix[r][c] == label) {
-                    System.out.print (r + ", " + c + " "); // debug
-                    if (startWord){
-                        game.setLastColClicked(c);
-                        game.setLastRowClicked(r);
-                        label.getStyleClass().add("clicked");
-                        String letter = label.getText();
-                        clickedLetters.push(letter);
-                        visited[r][c] = true;
-                        startWord = false;
-                    } else {
-
-                        if (game.validateTile(game.getLastRowClicked(), game.getLastColClicked(), r, c, visited)) {
-                            System.out.println("valid");
-                            label.getStyleClass().add("clicked");
-                            String letter = label.getText();
-                            clickedLetters.push(letter);
-                            visited[r][c] = true;
-                            game.setLastColClicked(c);
-                            game.setLastRowClicked(r);
-                        }
-                        else
-                            {
-                            System.out.println("invalid");
-                        }
-                    }
-                }
-            }
-        }
-        showCurrentWord();
-    }
-
     public void startGame() {
-        BoggleBoard boggleBoard = new BoggleBoard();
+        boggleBoard = new BoggleBoard();
         int index = 0;
         for (int r = 0; r < boggleBoard.getBoardSize(); r++) {
             for (int c = 0; c < boggleBoard.getBoardSize(); c++) {
@@ -78,6 +43,60 @@ public class BoggleController {
                 index++;
                 letterMatrix[r][c].setText(boggleBoard.getCubes()[r][c]);
             }
+        }
+        start.setVisible(false);
+        submit.setVisible(true);
+        initializeTimer();
+    }
+
+    public void onLetterClicked(javafx.scene.input.MouseEvent mouseEvent) {
+        Label label = (Label) mouseEvent.getSource();
+        for (int row = 0; row < boggleBoard.getBoardSize(); row++) {
+            for (int col = 0; col < boggleBoard.getBoardSize(); col++) {
+                if (letterMatrix[row][col] == label){
+                    if (startWord){
+                        onStartWord(row, col);
+                    } else {
+                        onAnyLetter(row, col);
+                    }
+                }
+            }
+        }
+        showCurrentWord();
+    }
+
+    public void initializeTimer() {
+        final int seconds = 30;
+        BoggleController controller = this;
+        new Thread(new Runnable() {
+            @Override public void run() {
+                new GameTimer(seconds, game, controller);
+                }
+
+        }).start();
+    }
+
+    private void onStartWord(int r, int c) {
+        visited[r][c] = true;
+        game.setLastRowClicked(r);
+        game.setLastColClicked(c);
+
+        String letter = letterMatrix[r][c].getText();
+        clickedLetters.push(letter);
+        letterMatrix[r][c].getStyleClass().add("clicked");
+
+        startWord = false;
+    }
+
+    private void onAnyLetter (int r, int c){
+        if (game.validateTile(game.getLastRowClicked(), game.getLastColClicked(), r, c, visited)) {
+            visited[r][c] = true;
+            game.setLastRowClicked(r);
+            game.setLastColClicked(c);
+
+            String letter =  letterMatrix[r][c].getText();
+            clickedLetters.push(letter);
+            letterMatrix[r][c].getStyleClass().add("clicked");
         }
     }
 
@@ -91,20 +110,25 @@ public class BoggleController {
     }
 
     public void submitWord() {
-        String word =  clickedLetters.toString()
+        String word = clickedLetters.toString()
                 .replaceAll("\\[", "")
                 .replaceAll("]", "")
                 .replaceAll(",", "")
                 .replaceAll(" ", "");
 
         if (game.enterWord(word)){
-            playerWords.setText(game.getPlayerWords().toString());
+            playerWords.setText("Player Words: (" + game.getPlayerWords().size() + ")\n" +game.getPlayerWords().toString().replace("[", "").replace("]", ""));
         }
+        afterSubmission();
+    }
+
+    private void afterSubmission () {
         clickedLetters.clear();
         currentWord.setText("");
         score.setText(String.valueOf(game.calculateScore()));
         visited = new boolean [SIZE][SIZE];
         startWord = true;
+
         for(Label[] letterSet : letterMatrix){
             for (Label letter : letterSet){
                 if (letter.getStyleClass().contains("clicked")){
@@ -114,12 +138,15 @@ public class BoggleController {
         }
     }
 
-    public void initializeTimer() {
-//        final int startTime = 180;
-//        Timer timerObj = new Timer();
-//        timer.setText()
+    public void endGame () {
+        submit.setVisible(false);
+        solve.setVisible(true);
     }
-// TODO Implement timer
-// TODO Format toolbar
-// TODO Controller Test
+    public void showSolution () throws IOException {
+        solvedWords.setVisible(true);
+        BoggleSolver boggleSolver = new BoggleSolver(boggleBoard, game, new WordTrie());
+        List<String> possibleWords = boggleSolver.getPossibleWords();
+        solvedWords.setText("Possible Boggle Words: (" + possibleWords.size() + ")\n" + possibleWords.toString().replace("[", "").replace("]", ""));
+    }
+
 }
