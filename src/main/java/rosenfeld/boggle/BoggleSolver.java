@@ -32,8 +32,10 @@ public class BoggleSolver {
         for (int row = 0; row < boggleMatrix.length; row++) {
             for (int col = 0; col < boggleMatrix.length; col++) {
                 String currPrefix = boggleMatrix[row][col];
+                visited[row][col] = true;
                 List<Location> originCellNeighbors = getNeighbors(row, col, visited);
                 boardSearch(originCellNeighbors, currPrefix, visited, boggleMatrix);
+                // When finished
                 Arrays.stream(visited).forEach(b -> Arrays.fill(b, false));
             }
         }
@@ -49,10 +51,7 @@ public class BoggleSolver {
                 visited[neighbor.getRow()][neighbor.getCol()] = true;
                 List<Location> newNeighbors = getNeighbors(neighbor.getRow(), neighbor.getCol(), visited);
                 boardSearch(newNeighbors, currWord, visited, boggleMatrix);
-            } else {
-                break;
             }
-            Arrays.stream(visited).forEach(b -> Arrays.fill(b, false));
         }
     }
 
