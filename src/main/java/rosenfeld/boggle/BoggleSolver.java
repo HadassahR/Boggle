@@ -1,27 +1,20 @@
 package rosenfeld.boggle;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Dictionary;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BoggleSolver {
     private BoggleBoard boggleBoard;
-    private List<String> boggleDictionary;
     private WordTrie wordTrie;
     private List<String> possibleWords;
 
-    public BoggleSolver(BoggleBoard boggleBoard, Game game, WordTrie wordTrie) {
+    public BoggleSolver(BoggleBoard boggleBoard, Game game, WordTrie wordTrie) throws IOException {
         this.boggleBoard = boggleBoard;
-        this.boggleDictionary = game.dictionary.getWordList().stream().filter(w -> w.length() > 3).collect(Collectors.toList());
-        this.wordTrie = new WordTrie();
-        createTrie();
+        this.wordTrie = new WordTrie(new BoggleDictionary());
         possibleWords = new ArrayList<>();
-    }
-
-    private void createTrie() {
-        for (String word : boggleDictionary) {
-            wordTrie.insert(word);
-        }
     }
 
     private void findWords() {

@@ -59,9 +59,10 @@ public class BoggleBoard {
     @Override
     public String toString(){
         StringBuilder retString =  new StringBuilder();
-        for (int row = 0; row < boggleMatrix.length; row++){
-            for (int col = 0; col < boggleMatrix.length; col ++){
-                retString.append(boggleMatrix[row][col] + " ");
+        for (String[] matrix : boggleMatrix) {
+            for (String s : matrix) {
+                retString.append(s);
+                retString.append(" ");
             }
             retString.append("\n");
         }

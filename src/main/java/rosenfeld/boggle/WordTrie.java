@@ -9,7 +9,13 @@ public class WordTrie {
     private int wordCount = 0;
 
     public WordTrie(){
+        root = new Node('*');
+    }
+    public WordTrie(BoggleDictionary dictionary){
         root = new Node ('*');
+        for (String word : dictionary.getWordList()){
+            this.insert(word);
+        }
     }
 
     public void insert (String word) {

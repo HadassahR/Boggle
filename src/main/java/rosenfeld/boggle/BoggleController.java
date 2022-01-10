@@ -48,6 +48,7 @@ public class BoggleController {
                         visited[r][c] = true;
                         startWord = false;
                     } else {
+
                         if (game.validateTile(game.getLastRowClicked(), game.getLastColClicked(), r, c, visited)) {
                             System.out.println("valid");
                             label.getStyleClass().add("clicked");
@@ -68,7 +69,6 @@ public class BoggleController {
         showCurrentWord();
     }
 
-
     public void startGame() {
         BoggleBoard boggleBoard = new BoggleBoard();
         int index = 0;
@@ -81,7 +81,7 @@ public class BoggleController {
         }
     }
 
-    public void showCurrentWord(){
+    private void showCurrentWord(){
         String word =  clickedLetters.toString()
                 .replaceAll("\\[", "")
                 .replaceAll("]", "")
@@ -119,9 +119,7 @@ public class BoggleController {
 //        Timer timerObj = new Timer();
 //        timer.setText()
     }
-//TODO Implement timer
+// TODO Implement timer
 // TODO Format toolbar
-// TODO Game logic
-// TODO Add Qu condition before adding the letter cube
-//TODO Controller Test
+// TODO Controller Test
 }

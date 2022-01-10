@@ -1,6 +1,7 @@
 package rosenfeld.boggle;
 import org.junit.Assert;
 import org.junit.Test;
+import java.io.IOException;
 
 public class WordTrieTest {
 
@@ -9,7 +10,19 @@ public class WordTrieTest {
                                                         "DEBUGGER", "DEVELOPER", "software", "JAVA"};
 
     @Test
-    public void insert(){
+    public void dictionary() throws IOException {
+        // given
+        WordTrie wordTrie = new WordTrie(new BoggleDictionary());
+
+        // when
+        int dictionaryCount = wordTrie.getWordCount();
+
+        // then
+        Assert.assertEquals(166896, dictionaryCount);
+    }
+
+    @Test
+    public void insert() {
         // given
         WordTrie wordTrie = new WordTrie();
 
@@ -45,7 +58,7 @@ public class WordTrieTest {
     }
 
     @Test
-    public void startsWith(){
+    public void startsWith() {
         // given
         WordTrie wordTrie = new WordTrie();
         for (String word : sampleDictionary) {
