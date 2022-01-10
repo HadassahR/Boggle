@@ -21,17 +21,32 @@ public class BoggleController {
     private BoggleBoard boggleBoard;
     private Stack <String> clickedLetters;
 
-    private boolean startWord = true;
-    private List<String> words;
-    private Label [][] letterMatrix;
-    private final int SIZE = 4;
-    private boolean[][] visited;
+    public boolean startWord = true;
+    public List<String> words;
+    public Label [][] letterMatrix;
+    public final int SIZE = 4;
+    public boolean[][] visited;
 
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
         game = new Game(new BoggleDictionary());
         visited = new boolean[SIZE][SIZE];
         letterMatrix = new Label[SIZE][SIZE];
+    }
+
+    public void startGame() {
+        boggleBoard = new BoggleBoard();
+        int index = 0;
+        for (int r = 0; r < boggleBoard.getBoardSize(); r++) {
+            for (int c = 0; c < boggleBoard.getBoardSize(); c++) {
+                letterMatrix[r][c] = letterSet.get(index);
+                index++;
+                letterMatrix[r][c].setText(boggleBoard.getCubes()[r][c]);
+            }
+        }
+        start.setVisible(false);
+        submit.setVisible(true);
+        initializeTimer();
     }
 
     public void onLetterClicked(javafx.scene.input.MouseEvent mouseEvent) {
@@ -48,21 +63,6 @@ public class BoggleController {
             }
         }
         showCurrentWord();
-    }
-
-    public void startGame() {
-        boggleBoard = new BoggleBoard();
-        int index = 0;
-        for (int r = 0; r < boggleBoard.getBoardSize(); r++) {
-            for (int c = 0; c < boggleBoard.getBoardSize(); c++) {
-                letterMatrix[r][c] = letterSet.get(index);
-                index++;
-                letterMatrix[r][c].setText(boggleBoard.getCubes()[r][c]);
-            }
-        }
-        start.setVisible(false);
-        submit.setVisible(true);
-        initializeTimer();
     }
 
     public void initializeTimer() {
