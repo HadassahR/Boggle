@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.util.*;
 
@@ -68,8 +66,13 @@ public class BoggleController {
     }
 
     public void initializeTimer() {
-        final int startTime = 1000;
-        timer.setText(String.valueOf(startTime));
+        BoggleController controller = this;
+        new Thread(new Runnable() {
+            @Override public void run() {
+                new GameTimer(20, game, controller);
+                }
+
+        }).start();
     }
 
     private void onStartWord(int r, int c) {
@@ -135,6 +138,7 @@ public class BoggleController {
     }
 
     public void endGame () {
+        submit.setVisible(false);
         solve.setVisible(true);
     }
     public void showSolution () throws IOException {
