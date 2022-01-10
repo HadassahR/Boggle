@@ -13,12 +13,32 @@ Label {
     -fx-border-radius: 6 6 6 6;
  }
 
+ Button {
+     -fx-background-color: #CCC1AF;
+     -fx-border-color: #AB997C;
+     -fx-border-weight: bold;
+     -fx-border-radius: 5;
+     -fx-padding: 3 6 6 6;
+     -fx-min-width: 50;
+     -fx-min-height: 20;
+ }
+
 TextField {
     -fx-min-width: 100;
-    -fx-max-width: 600;
-    -fx-min-height: 100;
+    -fx-max-width: 300;
+    -fx-min-height: 125;
 }
 
-#clicked {
+.clicked {
     -fx-background-color: #889dbf;
+}
+
+.timerStyle {
+     -fx-background-color: #CCC1AF;
+     -fx-border-color: #AB997C;
+     -fx-border-weight: bold;
+     -fx-border-radius: 5;
+     -fx-padding: 3 6 6 6;
+     -fx-min-width: 50;
+     -fx-min-height: 30;
 }

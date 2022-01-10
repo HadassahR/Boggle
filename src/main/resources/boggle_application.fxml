@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
+<?import java.lang.reflect.Array?>
 <?import java.util.ArrayList?>
 <BorderPane
         stylesheets="@boggle.css"
@@ -19,9 +19,9 @@
             <HBox alignment="TOP_CENTER" spacing="3">
                 <Button fx:id="start" text="Begin Game" onMouseClicked="#startGame" />
                 <Button fx:id="submit" text="Submit Word" onMouseClicked="#submitWord" />
-                <Text fx:id="currentWord"/>
-                <Text fx:id="timer" text="1:00"/>
-                <Text fx:id="score"/>
+                <Label styleClass="timerStyle" fx:id="currentWord"/>
+                <Label styleClass="timerStyle" fx:id="timer" text="1:00"/>
+                <Label styleClass="timerStyle" fx:id="score"/>
             </HBox>
         </ToolBar>
     </top>
@@ -50,27 +50,27 @@
     </center>
 
     <bottom>
-            <TextField fx:id="playerWords" editable="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="4"/>
+            <TextArea fx:id="playerWords" wrapText="true" editable="false" GridPane.columnSpan="4" GridPane.rowIndex="4"/>
     </bottom>
 
     <fx:define>
-        <ArrayList fx:id="letterTiles">
-            <fx:reference source="tile1"/>
-            <fx:reference source="tile2"/>
-            <fx:reference source="tile3"/>
-            <fx:reference source="tile4"/>
-            <fx:reference source="tile5"/>
-            <fx:reference source="tile6"/>
-            <fx:reference source="tile7"/>
-            <fx:reference source="tile8"/>
-            <fx:reference source="tile9"/>
-            <fx:reference source="tile10"/>
-            <fx:reference source="tile11"/>
-            <fx:reference source="tile12"/>
-            <fx:reference source="tile13"/>
-            <fx:reference source="tile14"/>
-            <fx:reference source="tile15"/>
-            <fx:reference source="tile16"/>
+        <ArrayList fx:id="letterSet">
+                <fx:reference source="tile1"/>
+                <fx:reference source="tile2"/>
+                <fx:reference source="tile3"/>
+                <fx:reference source="tile4"/>
+                <fx:reference source="tile5"/>
+                <fx:reference source="tile6"/>
+                <fx:reference source="tile7"/>
+                <fx:reference source="tile8"/>
+                <fx:reference source="tile9"/>
+                <fx:reference source="tile10"/>
+                <fx:reference source="tile11"/>
+                <fx:reference source="tile12"/>
+                <fx:reference source="tile13"/>
+                <fx:reference source="tile14"/>
+                <fx:reference source="tile15"/>
+                <fx:reference source="tile16"/>
         </ArrayList>
     </fx:define>
 </BorderPane>
