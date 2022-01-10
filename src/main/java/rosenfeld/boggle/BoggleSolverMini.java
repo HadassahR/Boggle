@@ -1,16 +1,17 @@
 package rosenfeld.boggle;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BoggleSolver {
+public class BoggleSolverMini {
     private BoggleBoard boggleBoard;
     private List<String> boggleDictionary;
     private WordTrie boggleTrie;
     private List<String> possibleWords;
 
-    public BoggleSolver(BoggleBoard board, Game game){
+    public BoggleSolverMini(BoggleBoard board, Game game){
         boggleBoard = board;
         boggleDictionary = game.dictionary.getWordList().stream().filter(w -> w.length() > 3).collect(Collectors.toList());
         boggleTrie = new WordTrie();
@@ -26,33 +27,39 @@ public class BoggleSolver {
     }
 
     private void findWords() {
-        boolean[][] visited = new boolean [boggleBoard.getBoardSize()][boggleBoard.getBoardSize()];
+        boolean[][] visited = new boolean [3][3];
         String[][] boggleMatrix = boggleBoard.getCubes();
+        String[][] miniMatrix = new String[3][3];
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3 ; col++) {
+                miniMatrix[row][col] = boggleMatrix[row][col];
+            }
+        }
 
-        for (int row = 0; row < boggleMatrix.length; row++) {
-            for (int col = 0; col < boggleMatrix.length; col++) {
-                String currPrefix = boggleMatrix[row][col];
+        for (int row = 0; row < miniMatrix.length; row++) {
+            for (int col = 0; col < miniMatrix.length; col++) {
+                String currPrefix = miniMatrix[row][col];
                 visited[row][col] = true;
                 List<Location> originCellNeighbors = getNeighbors(row, col, visited);
-                boardSearch(originCellNeighbors, currPrefix, visited, boggleMatrix);
+                boardSearch(originCellNeighbors, currPrefix, visited, miniMatrix);
                 // When finished
                 Arrays.stream(visited).forEach(b -> Arrays.fill(b, false));
             }
         }
     }
 
-    private void boardSearch (List<Location> neighbors, String currPrefix, boolean [][] visited, String[][] boggleMatrix) {
+    private void boardSearch (List<Location> neighbors, String currPrefix, boolean [][] visited, String[][] miniMatrix) {
         for (Location neighbor : neighbors) {
-            String currWord = currPrefix + boggleMatrix[neighbor.getRow()][neighbor.getCol()];
+            String currWord = currPrefix + miniMatrix[neighbor.getRow()][neighbor.getCol()];
             if (boggleTrie.startsWith(currWord)) {
                 if (boggleTrie.isWord(currWord)) {
                     possibleWords.add(currWord);
                 }
                 visited[neighbor.getRow()][neighbor.getCol()] = true;
                 List<Location> newNeighbors = getNeighbors(neighbor.getRow(), neighbor.getCol(), visited);
-                boardSearch(newNeighbors, currWord, visited, boggleMatrix);
+                boardSearch(newNeighbors, currWord, visited, miniMatrix);
             }
-            visited[neighbor.getRow()][neighbor.getCol()] = false;
+
         }
     }
 
@@ -70,22 +77,11 @@ public class BoggleSolver {
     }
 
     private boolean withinBoardAndUnvisited(int row, int col, boolean[][] visited) {
-        return (row > -1) && (col > -1) && (row < 4) && (col < 4) && (!visited[row][col]);
+        return (row > -1) && (col > -1) && (row < 3) && (col < 3) && (!visited[row][col]);
     }
 
     public List<String> getPossibleWords() {
         findWords();
         return this.possibleWords;
     }
-
-
-
 }
-
-
-
-
-
-
-
-
