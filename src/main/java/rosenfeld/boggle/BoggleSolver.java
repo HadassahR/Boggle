@@ -34,9 +34,8 @@ public class BoggleSolver {
                 String currPrefix = boggleMatrix[row][col];
                 List<Location> originCellNeighbors = getNeighbors(row, col, visited);
                 boardSearch(originCellNeighbors, currPrefix, visited, boggleMatrix);
-                for (boolean[] b : visited){
-                    Arrays.fill(b, false);
-                }            }
+                Arrays.stream(visited).forEach(b -> Arrays.fill(b, false));
+            }
         }
     }
 
@@ -53,9 +52,7 @@ public class BoggleSolver {
             } else {
                 break;
             }
-            for (boolean[] b : visited){
-                Arrays.fill(b, false);
-            }
+            Arrays.stream(visited).forEach(b -> Arrays.fill(b, false));
         }
     }
 
