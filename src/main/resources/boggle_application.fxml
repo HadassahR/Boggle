@@ -19,7 +19,7 @@
                 <Button fx:id="submit" text="Submit Word" onMouseClicked="#submitWord" visible = "false"/>
                 <Button fx:id="solve" text="Solve Boggle" onMouseClicked="#showSolution" visible="false"/>
                 <Label styleClass="timerStyle" fx:id="currentWord"/>
-                <Label styleClass="timerStyle" fx:id="timer" text="1:00"/>
+                <Label styleClass="timerStyle" fx:id="timer"/>
                 <Label styleClass="timerStyle" fx:id="score"/>
             </HBox>
         </ToolBar>

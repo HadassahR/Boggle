@@ -66,10 +66,11 @@ public class BoggleController {
     }
 
     public void initializeTimer() {
+        final int seconds = 30;
         BoggleController controller = this;
         new Thread(new Runnable() {
             @Override public void run() {
-                new GameTimer(20, game, controller);
+                new GameTimer(seconds, game, controller);
                 }
 
         }).start();

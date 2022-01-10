@@ -11,7 +11,7 @@ public class GameTimer {
         timer.schedule(new GameTask(game, controller), seconds * 1000);
     }
 
-    class GameTask extends TimerTask {
+    private class GameTask extends TimerTask {
         Game game;
         BoggleController controller;
         public GameTask (Game game, BoggleController controller) {
