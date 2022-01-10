@@ -27,6 +27,7 @@ TextField {
     -fx-min-width: 100;
     -fx-max-width: 300;
     -fx-min-height: 125;
+    -fx-min-height: 500;
 }
 
 .clicked {
@@ -41,4 +42,13 @@ TextField {
      -fx-padding: 3 6 6 6;
      -fx-min-width: 50;
      -fx-min-height: 30;
+     -fx-font: 14px Arial;
+     -fx-font-weight: NORMAL;
 }
+
+.solutionTextArea {
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+    -fx-min-width: 320;
+   }

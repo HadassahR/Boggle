@@ -2,7 +2,6 @@ package rosenfeld.boggle;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Dictionary;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +14,7 @@ public class BoggleSolver {
         this.boggleBoard = boggleBoard;
         this.wordTrie = new WordTrie(new BoggleDictionary());
         possibleWords = new ArrayList<>();
+        findWords();
     }
 
     private void findWords() {
@@ -68,7 +68,6 @@ public class BoggleSolver {
     }
 
     public List<String> getPossibleWords() {
-        findWords();
         possibleWords = possibleWords.stream().distinct().collect(Collectors.toList());
         return this.possibleWords;
     }

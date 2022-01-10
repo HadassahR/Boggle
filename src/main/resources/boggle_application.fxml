@@ -2,8 +2,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
-<?import java.lang.reflect.Array?>
 <?import java.util.ArrayList?>
 <BorderPane
         stylesheets="@boggle.css"
@@ -19,7 +17,7 @@
             <HBox alignment="TOP_CENTER" spacing="3">
                 <Button fx:id="start" text="Begin Game" onMouseClicked="#startGame"/>
                 <Button fx:id="submit" text="Submit Word" onMouseClicked="#submitWord" visible = "false"/>
-                <Button fx:id="solve" text="Solve Boggle" onMouseClicked="#showSolution" visible = "false"/>
+                <Button fx:id="solve" text="Solve Boggle" onMouseClicked="#showSolution" visible="false"/>
                 <Label styleClass="timerStyle" fx:id="currentWord"/>
                 <Label styleClass="timerStyle" fx:id="timer" text="1:00"/>
                 <Label styleClass="timerStyle" fx:id="score"/>
@@ -47,6 +45,9 @@
             <Label fx:id="tile14" onMouseClicked="#onLetterClicked" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
             <Label fx:id="tile15" onMouseClicked="#onLetterClicked" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
             <Label fx:id="tile16" onMouseClicked="#onLetterClicked" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+            <TextArea fx:id="solvedWords" wrapText="true" editable="false" styleClass="solutionTextArea"
+                      GridPane.columnSpan="4" GridPane.rowSpan="8" GridPane.columnIndex="4" GridPane.rowIndex="0" maxWidth="240" visible="false"/>
         </GridPane>
     </center>
 
