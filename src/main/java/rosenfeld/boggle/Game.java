@@ -100,4 +100,5 @@ public class Game {
     public void setLastColClicked (int n) {
         lastColClicked = n;
     }
+
 }

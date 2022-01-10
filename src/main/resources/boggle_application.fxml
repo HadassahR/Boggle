@@ -17,8 +17,9 @@
     <top>
         <ToolBar>
             <HBox alignment="TOP_CENTER" spacing="3">
-                <Button fx:id="start" text="Begin Game" onMouseClicked="#startGame" />
-                <Button fx:id="submit" text="Submit Word" onMouseClicked="#submitWord" />
+                <Button fx:id="start" text="Begin Game" onMouseClicked="#startGame"/>
+                <Button fx:id="submit" text="Submit Word" onMouseClicked="#submitWord" visible = "false"/>
+                <Button fx:id="solve" text="Solve Boggle" onMouseClicked="#showSolution" visible = "false"/>
                 <Label styleClass="timerStyle" fx:id="currentWord"/>
                 <Label styleClass="timerStyle" fx:id="timer" text="1:00"/>
                 <Label styleClass="timerStyle" fx:id="score"/>
@@ -50,28 +51,27 @@
     </center>
 
     <bottom>
-            <TextArea fx:id="playerWords" wrapText="true" editable="false" GridPane.columnSpan="4" GridPane.rowIndex="4"/>
+        <TextArea fx:id="playerWords" wrapText="true" editable="false" GridPane.columnSpan="4" GridPane.rowIndex="4" maxWidth="240" maxHeight="200"/>
     </bottom>
 
     <fx:define>
         <ArrayList fx:id="letterSet">
-                <fx:reference source="tile1"/>
-                <fx:reference source="tile2"/>
-                <fx:reference source="tile3"/>
-                <fx:reference source="tile4"/>
-                <fx:reference source="tile5"/>
-                <fx:reference source="tile6"/>
-                <fx:reference source="tile7"/>
-                <fx:reference source="tile8"/>
-                <fx:reference source="tile9"/>
-                <fx:reference source="tile10"/>
-                <fx:reference source="tile11"/>
-                <fx:reference source="tile12"/>
-                <fx:reference source="tile13"/>
-                <fx:reference source="tile14"/>
-                <fx:reference source="tile15"/>
-                <fx:reference source="tile16"/>
+            <fx:reference source="tile1"/>
+            <fx:reference source="tile2"/>
+            <fx:reference source="tile3"/>
+            <fx:reference source="tile4"/>
+            <fx:reference source="tile5"/>
+            <fx:reference source="tile6"/>
+            <fx:reference source="tile7"/>
+            <fx:reference source="tile8"/>
+            <fx:reference source="tile9"/>
+            <fx:reference source="tile10"/>
+            <fx:reference source="tile11"/>
+            <fx:reference source="tile12"/>
+            <fx:reference source="tile13"/>
+            <fx:reference source="tile14"/>
+            <fx:reference source="tile15"/>
+            <fx:reference source="tile16"/>
         </ArrayList>
     </fx:define>
 </BorderPane>
-

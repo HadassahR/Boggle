@@ -10,7 +10,7 @@ import java.util.*;
 
 public class BoggleController {
     @FXML
-    public Button start, submitWord;
+    public Button start, submit, solve;
     @FXML
     public Label currentWord, score, timer;
     @FXML
@@ -59,7 +59,7 @@ public class BoggleController {
                             game.setLastRowClicked(r);
                         }
                         else
-                            {
+                        {
                             System.out.println("invalid");
                         }
                     }
@@ -70,6 +70,7 @@ public class BoggleController {
     }
 
     public void startGame() {
+        start.setVisible(false);
         BoggleBoard boggleBoard = new BoggleBoard();
         int index = 0;
         for (int r = 0; r < boggleBoard.getBoardSize(); r++) {
@@ -79,6 +80,7 @@ public class BoggleController {
                 letterMatrix[r][c].setText(boggleBoard.getCubes()[r][c]);
             }
         }
+        submit.setVisible(true);
     }
 
     private void showCurrentWord(){
@@ -118,6 +120,13 @@ public class BoggleController {
 //        final int startTime = 180;
 //        Timer timerObj = new Timer();
 //        timer.setText()
+    }
+
+    public void endGame () {
+        solve.setVisible(true);
+    }
+    public void showSolution () {
+
     }
 // TODO Implement timer
 // TODO Format toolbar
