@@ -7,26 +7,25 @@ import java.util.stream.Collectors;
 public class BoggleSolver {
     private BoggleBoard boggleBoard;
     private List<String> boggleDictionary;
-    private WordTrie boggleTrie;
+    private WordTrie wordTrie;
     private List<String> possibleWords;
 
-    public BoggleSolver(BoggleBoard board, Game game){
-        boggleBoard = board;
-        boggleDictionary = game.dictionary.getWordList().stream().filter(w -> w.length() > 3).collect(Collectors.toList());
-        boggleTrie = new WordTrie();
-        possibleWords = new ArrayList<>();
+    public BoggleSolver(BoggleBoard boggleBoard, Game game, WordTrie wordTrie) {
+        this.boggleBoard = boggleBoard;
+        this.boggleDictionary = game.dictionary.getWordList().stream().filter(w -> w.length() > 3).collect(Collectors.toList());
+        this.wordTrie = new WordTrie();
         createTrie();
+        possibleWords = new ArrayList<>();
     }
 
-    private void createTrie(){
-        boggleTrie = new WordTrie();
-        for (String word : boggleDictionary){
-            boggleTrie.insert(word);
+    private void createTrie() {
+        for (String word : boggleDictionary) {
+            wordTrie.insert(word);
         }
     }
 
     private void findWords() {
-        boolean[][] visited = new boolean [boggleBoard.getBoardSize()][boggleBoard.getBoardSize()];
+        boolean[][] visited = new boolean[boggleBoard.getBoardSize()][boggleBoard.getBoardSize()];
         String[][] boggleMatrix = boggleBoard.getCubes();
 
         for (int row = 0; row < boggleMatrix.length; row++) {
@@ -41,28 +40,30 @@ public class BoggleSolver {
         }
     }
 
-    private void boardSearch (List<Location> neighbors, String currPrefix, boolean [][] visited, String[][] boggleMatrix) {
+    private void boardSearch(List<Location> neighbors, String currPrefix, boolean[][] visited, String[][] boggleMatrix) {
         for (Location neighbor : neighbors) {
-            String currWord = currPrefix + boggleMatrix[neighbor.getRow()][neighbor.getCol()];
-            if (boggleTrie.startsWith(currWord)) {
-                if (boggleTrie.isWord(currWord)) {
+            int neighborRow = neighbor.getRow();
+            int neighborCol = neighbor.getCol();
+            String currWord = currPrefix + boggleMatrix[neighborRow][neighborCol];
+            if (wordTrie.startsWith(currWord)) {
+                if (wordTrie.isWord(currWord)) {
                     possibleWords.add(currWord);
                 }
-                visited[neighbor.getRow()][neighbor.getCol()] = true;
-                List<Location> newNeighbors = getNeighbors(neighbor.getRow(), neighbor.getCol(), visited);
+                visited[neighborRow][neighborCol] = true;
+                List<Location> newNeighbors = getNeighbors(neighborRow, neighborCol, visited);
                 boardSearch(newNeighbors, currWord, visited, boggleMatrix);
             }
-            visited[neighbor.getRow()][neighbor.getCol()] = false;
+            visited[neighborRow][neighborCol] = false;
         }
     }
 
-    private List<Location> getNeighbors(int row, int col, boolean [][] visited) {
+    private List<Location> getNeighbors(int row, int col, boolean[][] visited) {
         List<Location> neighbors = new ArrayList<>();
-        int[] rowPath = new int [] { 0, 0, 1, 1, -1, 1, -1, -1 };
-        int[] colPath = new int [] { 1, -1, -1, 1, 1, 0, 0, -1 };
+        int[] rowPath = new int[]{0, 0, 1, 1, -1, 1, -1, -1};
+        int[] colPath = new int[]{1, -1, -1, 1, 1, 0, 0, -1};
 
         for (int ix = 0; ix < rowPath.length; ix++) {
-            if (withinBoardAndUnvisited(row + rowPath[ix], col + colPath[ix], visited)){
+            if (withinBoardAndUnvisited(row + rowPath[ix], col + colPath[ix], visited)) {
                 neighbors.add(new Location(row + rowPath[ix], col + colPath[ix]));
             }
         }
@@ -75,17 +76,7 @@ public class BoggleSolver {
 
     public List<String> getPossibleWords() {
         findWords();
+        possibleWords = possibleWords.stream().distinct().collect(Collectors.toList());
         return this.possibleWords;
     }
-
-
-
 }
-
-
-
-
-
-
-
-

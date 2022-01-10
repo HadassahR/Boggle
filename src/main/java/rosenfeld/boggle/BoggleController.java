@@ -4,10 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class BoggleController {
@@ -30,7 +28,7 @@ public class BoggleController {
 
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
-        game = new Game(new Dictionary());
+        game = new Game(new BoggleDictionary());
         visited = new boolean[SIZE][SIZE];
         letterMatrix = new Label[SIZE][SIZE];
     }

@@ -1,17 +1,16 @@
 package rosenfeld.boggle;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    Dictionary dictionary;
+    BoggleDictionary dictionary;
     private List<String> userWords;
     private final int MIN_LENGTH = 4;
     private int lastRowClicked;
     private int lastColClicked;
 
-    public Game(Dictionary dictionary) {
+    public Game(BoggleDictionary dictionary) {
         this.dictionary = dictionary;
         userWords = new ArrayList<>();
     }

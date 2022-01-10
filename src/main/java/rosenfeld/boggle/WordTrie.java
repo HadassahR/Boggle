@@ -1,7 +1,9 @@
 package rosenfeld.boggle;
 
-import java.io.IOException;
-
+/*
+    More about Trie data structure: https://www.geeksforgeeks.org/boggle-set-2-using-trie/?ref=lbp
+    See ReadMe for additional resources.
+ */
 public class WordTrie {
     private Node root;
     private int wordCount = 0;
@@ -15,10 +17,11 @@ public class WordTrie {
         Node curr = root;
         for (int i = 0; i < word.length(); i++){
             char c = word.charAt(i);
-            if (curr.children[c - 'A'] == null){
-                curr.children [c - 'A'] = new Node (c);
+            int index = c - 'A';
+            if (curr.children[index] == null){
+                curr.children [index] = new Node (c);
             }
-            curr = curr.children[c - 'A'];
+            curr = curr.children[index];
         }
         curr.isWord = true;
         wordCount ++;

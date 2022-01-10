@@ -10,8 +10,8 @@ public class BoggleSolverTest {
     public void createWordTrie() throws IOException {
         // given
         BoggleBoard boggleBoard = new BoggleBoard();
-        Game game = new Game(new Dictionary());
-        BoggleSolver boggleSolver = new BoggleSolver(boggleBoard, game);
+        Game game = new Game(new BoggleDictionary());
+        BoggleSolver boggleSolver = new BoggleSolver(boggleBoard, game, new WordTrie());
 
         // when
         List<String> words = boggleSolver.getPossibleWords();
