@@ -1,5 +1,4 @@
 package rosenfeld.boggle;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,11 +32,29 @@ public class BoggleSolver {
         for (int row = 0; row < boggleMatrix.length; row++) {
             for (int col = 0; col < boggleMatrix.length; col++) {
                 String currPrefix = boggleMatrix[row][col];
-                List<Location> neighbors = getNeighbors(row, col, visited);
-                while (neighbors.size() > 0) {
-                   boardSearch(neighbors, currPrefix, visited, boggleMatrix);
-                   visited = new boolean [boggleBoard.getBoardSize()][boggleBoard.getBoardSize()]; // reset all visited to false
+                List<Location> originCellNeighbors = getNeighbors(row, col, visited);
+                boardSearch(originCellNeighbors, currPrefix, visited, boggleMatrix);
+                for (boolean[] b : visited){
+                    Arrays.fill(b, false);
+                }            }
+        }
+    }
+
+    private void boardSearch (List<Location> neighbors, String currPrefix, boolean [][] visited, String[][] boggleMatrix) {
+        for (Location neighbor : neighbors) {
+            String currWord = currPrefix + boggleMatrix[neighbor.getRow()][neighbor.getCol()];
+            if (boggleTrie.startsWith(currWord)) {
+                if (boggleTrie.isWord(currWord)) {
+                    possibleWords.add(currWord);
                 }
+                visited[neighbor.getRow()][neighbor.getCol()] = true;
+                List<Location> newNeighbors = getNeighbors(neighbor.getRow(), neighbor.getCol(), visited);
+                boardSearch(newNeighbors, currWord, visited, boggleMatrix);
+            } else {
+                break;
+            }
+            for (boolean[] b : visited){
+                Arrays.fill(b, false);
             }
         }
     }
@@ -57,22 +74,6 @@ public class BoggleSolver {
 
     private boolean withinBoardAndUnvisited(int row, int col, boolean[][] visited) {
         return (row > -1) && (col > -1) && (row < 4) && (col < 4) && (!visited[row][col]);
-    }
-
-    private void boardSearch (List<Location> neighbors, String currPrefix, boolean [][] visited, String[][] boggleMatrix) {
-        for (Location location : neighbors) {
-            String currWord = currPrefix + boggleMatrix[location.getRow()][location.getCol()];
-            if (boggleTrie.startsWith(currWord)) {
-                if (boggleTrie.isWord(currWord)) {
-                    possibleWords.add(currWord);
-                }
-                visited[location.getRow()][location.getCol()] = true;
-                List<Location> newNeighbors = getNeighbors(location.getRow(), location.getCol(), visited);
-                boardSearch(newNeighbors, currWord, visited, boggleMatrix);
-            } else {
-                neighbors.remove(location);
-            }
-        }
     }
 
     public List<String> getPossibleWords() {
