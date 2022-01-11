@@ -1,5 +1,6 @@
 package rosenfeld.boggle;
 
+import com.sun.org.apache.xpath.internal.objects.XString;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,7 +69,7 @@ public class BoggleController {
         showCurrentWord();
     }
 
-    public void initializeTimer() {
+    private void initializeTimer() {
         final int seconds = 180;
         BoggleController controller = this;
         new Thread(() -> new GameTimer(seconds, game, controller)).start();
@@ -141,10 +142,11 @@ public class BoggleController {
         solve.setVisible(true);
         currentWord.setVisible(false);
     }
+
     public void showSolution () throws IOException {
-        solvedWords.setVisible(true);
         BoggleSolver boggleSolver = new BoggleSolver(boggleBoard, game, new WordTrie());
         List<String> possibleWords = boggleSolver.getPossibleWords();
+        solvedWords.setVisible(true);
         solvedWords.setText("Possible Boggle Words: (" + possibleWords.size() + ")\n" + possibleWords.toString().replace("[", "").replace("]", ""));
     }
 
