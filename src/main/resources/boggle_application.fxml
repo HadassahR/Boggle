@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.util.ArrayList?>
+<?import javafx.scene.text.Text?>
 <BorderPane
         stylesheets="@boggle.css"
         xmlns:fx="http://javafx.com/fxml"
@@ -15,12 +16,11 @@
     <top>
         <ToolBar>
             <HBox alignment="TOP_CENTER" spacing="3">
-                <Button fx:id="start" text="Begin Game" onMouseClicked="#startGame"/>
                 <Button fx:id="submit" text="Submit Word" onMouseClicked="#submitWord" visible = "false"/>
                 <Button fx:id="solve" text="Solve Boggle" onMouseClicked="#showSolution" visible="false"/>
                 <Label styleClass="timerStyle" fx:id="currentWord"/>
-                <Label styleClass="timerStyle" fx:id="timer"/>
                 <Label styleClass="timerStyle" fx:id="score"/>
+                <Button fx:id="start" text="Begin Game" onMouseClicked="#startGame"/>
             </HBox>
         </ToolBar>
     </top>

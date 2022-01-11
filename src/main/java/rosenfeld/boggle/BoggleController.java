@@ -1,25 +1,34 @@
 package rosenfeld.boggle;
 
+import com.sun.org.apache.xpath.internal.objects.XString;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 public class BoggleController {
     @FXML
     public Button start, submit, solve;
     @FXML
-    public Label currentWord, score, timer;
+    public Label currentWord, score;
     @FXML
     public ArrayList<Label> letterSet;
     @FXML
     public TextArea playerWords, solvedWords;
 
-    private Game game;
     private BoggleBoard boggleBoard;
-    private Stack <String> clickedLetters;
+    private BoggleDictionary dictionary;
+    private BoggleSolver boggleSolver;
+    private Game game;
+    private WordTrie wordTrie;
+
+
+    public Stack <String> clickedLetters;
 
     public boolean startWord = true;
     public List<String> words;
@@ -27,6 +36,15 @@ public class BoggleController {
     public final int SIZE = 4;
     public boolean[][] visited;
 
+    public BoggleController (BoggleBoard board, BoggleDictionary dictionary, BoggleSolver boggleSolver,
+                             Game game, WordTrie wordTrie){
+        this.boggleBoard = board;
+        this.dictionary = dictionary;
+        this.boggleSolver = boggleSolver;
+        this.game = game;
+        this.wordTrie = wordTrie;
+
+    }
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
         game = new Game(new BoggleDictionary());
@@ -65,15 +83,10 @@ public class BoggleController {
         showCurrentWord();
     }
 
-    public void initializeTimer() {
-        final int seconds = 15;
+    private void initializeTimer() {
+        final int seconds = 180;
         BoggleController controller = this;
-        new Thread(new Runnable() {
-            @Override public void run() {
-                new GameTimer(seconds, game, controller);
-                }
-
-        }).start();
+        new Thread(() -> new GameTimer(seconds, game, controller)).start();
     }
 
     private void onStartWord(int r, int c) {
@@ -125,7 +138,7 @@ public class BoggleController {
     private void afterSubmission () {
         clickedLetters.clear();
         currentWord.setText("");
-        score.setText(String.valueOf(game.calculateScore()));
+        score.setText("SCORE: " + game.calculateScore());
         visited = new boolean [SIZE][SIZE];
         startWord = true;
 
@@ -141,11 +154,13 @@ public class BoggleController {
     public void endGame () {
         submit.setVisible(false);
         solve.setVisible(true);
+        currentWord.setVisible(false);
     }
+
     public void showSolution () throws IOException {
-        solvedWords.setVisible(true);
         BoggleSolver boggleSolver = new BoggleSolver(boggleBoard, game, new WordTrie());
         List<String> possibleWords = boggleSolver.getPossibleWords();
+        solvedWords.setVisible(true);
         solvedWords.setText("Possible Boggle Words: (" + possibleWords.size() + ")\n" + possibleWords.toString().replace("[", "").replace("]", ""));
     }
 
