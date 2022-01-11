@@ -5,9 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import static org.mockito.Mockito.*;
@@ -23,7 +23,6 @@ public class BoggleControllerTest {
     }
 
     private void givenBoggleController () throws IOException {
-        boggleController = new BoggleController();
         BoggleBoard boggleBoard = mock(BoggleBoard.class);
         BoggleDictionary boggleDictionary = mock(BoggleDictionary.class);
         BoggleSolver boggleSolver = mock(BoggleSolver.class);
@@ -31,11 +30,16 @@ public class BoggleControllerTest {
         GameTimer timer = mock(GameTimer.class);
         WordTrie trie = mock(WordTrie.class);
         Location location = mock(Location.class);
+        boggleController = new BoggleController(boggleBoard, boggleDictionary, boggleSolver, game, trie);
+
         Stack<String> clickedLetters = mock(Stack.class);
         boggleController.start = mock(Button.class);
         boggleController.submit = mock(Button.class);
         boggleController.solve = mock(Button.class);
+        boggleController.clickedLetters = mock(Stack.class);
         boggleController.currentWord = mock(Label.class);
+        boggleController.words = mock(List.class);
+        boggleController.score = mock(Label.class);
         boggleController.playerWords = mock(TextArea.class);
         boggleController.solvedWords = mock(TextArea.class);
         boggleController.letterSet = new ArrayList<>();
@@ -50,6 +54,7 @@ public class BoggleControllerTest {
                 boggleController.letterMatrix[r][c] = mock(Label.class);
             }
         }
+        boggleController.visited = new boolean[SIZE][SIZE];
     }
 
     @Test
@@ -69,13 +74,20 @@ public class BoggleControllerTest {
 
     @Test
     public void onLetterClicked() {
-
     }
 
     @Test
     public void submitWord () throws IOException {
-
-
+//        // given
+//        givenBoggleController();
+//        doReturn("GAME").when(boggleController.clickedLetters).toString();
+//        doReturn("Player Words: (1)\n GAME").when(boggleController.playerWords).getText();
+//
+//        // when
+//        boggleController.submitWord();
+//
+//       //  then
+//        verify(boggleController.playerWords).setText("Player Words: (1)\n GAME");
     }
 
     @Test
@@ -96,8 +108,15 @@ public class BoggleControllerTest {
     }
 
     @Test
-    public void showSolution() {
-
+    public void showSolution() throws IOException {
+//        // given
+//        givenBoggleController();
+//        doReturn(true).when(boggleController.solvedWords).isVisible();
+//
+//        // when
+//        boggleController.showSolution();
+//
+//        // then
+//        verify(boggleController.solvedWords).setVisible(true);
     }
-
 }

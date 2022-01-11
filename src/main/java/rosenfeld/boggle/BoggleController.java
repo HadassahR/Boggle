@@ -21,9 +21,14 @@ public class BoggleController {
     @FXML
     public TextArea playerWords, solvedWords;
 
-    private Game game;
     private BoggleBoard boggleBoard;
-    private Stack <String> clickedLetters;
+    private BoggleDictionary dictionary;
+    private BoggleSolver boggleSolver;
+    private Game game;
+    private WordTrie wordTrie;
+
+
+    public Stack <String> clickedLetters;
 
     public boolean startWord = true;
     public List<String> words;
@@ -31,6 +36,15 @@ public class BoggleController {
     public final int SIZE = 4;
     public boolean[][] visited;
 
+    public BoggleController (BoggleBoard board, BoggleDictionary dictionary, BoggleSolver boggleSolver,
+                             Game game, WordTrie wordTrie){
+        this.boggleBoard = board;
+        this.dictionary = dictionary;
+        this.boggleSolver = boggleSolver;
+        this.game = game;
+        this.wordTrie = wordTrie;
+
+    }
     public void initialize() throws IOException {
         clickedLetters = new Stack<>();
         game = new Game(new BoggleDictionary());

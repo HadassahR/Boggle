@@ -10,8 +10,13 @@ public class BoggleApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        BoggleBoard boggleBoard = new BoggleBoard();
+        BoggleDictionary dictionary = new BoggleDictionary();
+        Game game = new Game(dictionary);
+        WordTrie wordTrie = new WordTrie(dictionary);
+        BoggleSolver boggleSolver = new BoggleSolver(boggleBoard, game, wordTrie);
 
-        BoggleController boggleController = new BoggleController();
+        BoggleController boggleController = new BoggleController(boggleBoard, dictionary, boggleSolver, game, wordTrie);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/boggle_application.fxml"));
         loader.setController(boggleController);
